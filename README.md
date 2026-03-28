@@ -6,7 +6,6 @@
 ### Integrantes 
 
 |Nicole Medina Saraya ()|Ariana Roca Peréz ()|
-|--------------|-----------------------------------|
 |Megan Chunga Rodriguez ()|Benji Gomez Zegarra()|
 |Sydnee()|
 
