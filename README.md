@@ -10,5 +10,5 @@
 |Ariana Roca Peréz | Rol 2      |
 | Megan Chunga Rodriguez | Rol 3      |
 | Benji Gomez Zegarra | Rol 4      |
-|Sydnee|Rol 5|
+|Sydnee Yampara|Rol 5|
 
