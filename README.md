@@ -1,4 +1,4 @@
-## Proyecto Biodiseño-Grupo 6 
+# <p align="center">## Proyecto Biodiseño-Grupo 6 
 
   ¡Bienvenidos al repositorio del grupo N° 6!
   
