@@ -8,9 +8,9 @@
 
 | Nombre   | Rol        |
 |:--------:|:----------:|
-| Nicole Medina Saraya| Rol 1      |
-|Ariana Roca Peréz | Rol 2      |
-| Megan Chunga Rodriguez | Rol 3      |
-| Benji Gomez Zegarra | Rol 4      |
-|Sydnee Yampara|Rol 5|
+| Nicole Medina Saraya|  Encargada del GitHub y Adjunta de Coordinación  |
+|Ariana Roca Peréz | Encargado de Programación y Adjunto de Electronica   |
+| Megan Chunga Rodriguez | Responsable del diseño 3D y Adjunta de edición    |
+| Benji Gomez Zegarra | Coordinador, Encargado de Electrónica     |
+|Sydnee Yampara|Encargado de la impresión, manufactura y Adjunto de Programación|
 
