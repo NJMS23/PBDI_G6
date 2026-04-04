@@ -20,6 +20,6 @@
 >
 ### <p align="center"> Megan Suyay Chunga Rodriguez </p>
 
-><p align="center"> <img src=fotos/WhatsApp Image 2026-04-04 at 10.00.26 AM.jpeg width="30%"> </p>
+><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/420ab761a4b617e63a25cd5dae496a98c6aee04f/fotos/WhatsApp%20Image%202026-04-04%20at%2010.00.26%20AM.jpeg width="30%"> </p>
 >
 ### <p align="center"> Sydnee Asdrith Yampara Mamani </p>
