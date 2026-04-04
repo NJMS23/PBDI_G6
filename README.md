@@ -14,3 +14,9 @@
 | Benji Gomez Zegarra | Coordinador, Encargado de Electrónica     |
 |Sydnee Yampara|Encargado de la impresión, manufactura y Adjunto de Programación|
 
+## Conócenos
+
+><p align="center"> <img src=https://github.com/AylinMar/FunbioGrupo4/blob/edc241303c95061910510a9596632d5797de373c/Fotos%20del%20Equipo/20231109_201855.jpg width="30%"> </p>
+>
+### <p align="center"> Megan Suyay Chunga Rodriguez </p>
+
