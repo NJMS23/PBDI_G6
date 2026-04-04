@@ -23,3 +23,8 @@
 ><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/420ab761a4b617e63a25cd5dae496a98c6aee04f/fotos/WhatsApp%20Image%202026-04-04%20at%2010.00.26%20AM.jpeg width="30%"> </p>
 >
 ### <p align="center"> Sydnee Asdrith Yampara Mamani </p>
+
+><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/2995eb4aab4c6106776628adc4cd79482b5affa6/fotos/WhatsApp%20Image%202026-04-04%20at%2010.04.51%20AM.jpeg width="30%"> </p>
+>
+### <p align="center"> Sydnee Asdrith Yampara Mamani </p>
+
