@@ -26,5 +26,5 @@
 ><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/2995eb4aab4c6106776628adc4cd79482b5affa6/fotos/WhatsApp%20Image%202026-04-04%20at%2010.04.51%20AM.jpeg width="30%"> </p>
 >
 ### <p align="center"> Nicole Janeth Medina Saraya </p>
-><p align="center">< img src=Whats-App-Image-2023-09-17-at-21-04-10-1.jpg](https://i.postimg.cc/vTpqSPHT/Whats-App-Image-2023-09-17-at-21-04-10-1.jpg) width ="30%"></p>
+><p align="center">< img src=https://github.com/NJMS23/PBDI_G6/blob/1e395a049b7ff4e68d4638508bd30117d08a9dc6/fotos/Whats-App-Image-2023-09-17-at-21-04-10-(1).jpgwidth ="30%"></p>
 
