@@ -8,7 +8,7 @@
 
 | Nombre   | Rol        |
 |:--------:|:----------:|
-| Nicole Medina Saraya|  Encargada del GitHub y Adjunta de Coordinación  |
+| Nicole Medina Saraya|  Encargada del GitHub y Adjunta de Coordinación y  |
 |Ariana Roca Peréz | Encargado de Programación y Adjunto de Electronica   |
 | Megan Chunga Rodriguez | Responsable del diseño 3D y Adjunta de edición    |
 | Benji Gomez Zegarra | Coordinador, Encargado de Electrónica     |
