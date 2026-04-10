@@ -21,14 +21,18 @@
 ### <p align="center"> Sydnee Asdrith Yampara Mamani </p>
 ><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/420ab761a4b617e63a25cd5dae496a98c6aee04f/fotos/WhatsApp%20Image%202026-04-04%20at%2010.00.26%20AM.jpeg width="30%"> </p>
 >
-### <p align="center"> Bneji </p>
+### <p align="center"> Benji Gomez Zegarra  </p>
 
 ><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/2995eb4aab4c6106776628adc4cd79482b5affa6/fotos/WhatsApp%20Image%202026-04-04%20at%2010.04.51%20AM.jpeg width="30%"> </p>
 >
-### <p align="center"> Bneji </p>
+### <p align="center"> Nicole Medina Saraya</p>
 
 ><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/1e395a049b7ff4e68d4638508bd30117d08a9dc6/fotos/Whats-App-Image-2023-09-17-at-21-04-10-(1).jpg width="30%"> </p>
+
 >
+### <p align="center">Ariana Roca Peréz  </p>
+
+><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/1e395a049b7ff4e68d4638508bd30117d08a9dc6/fotos/Whats-App-Image-2023-09-17-at-21-04-10-(1).jpg width="30%"> </p>
 
 
 
