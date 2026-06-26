@@ -32,7 +32,7 @@
 >
 ### <p align="center">Ariana Roca Peréz  </p>
 
-><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/1e395a049b7ff4e68d4638508bd30117d08a9dc6/fotos/Whats-App-Image-2023-09-17-at-21-04-10-(1).jpg width="30%"> </p>
+><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/753b96cd75d52f888a84dc500b7e530e3adaad56/fotos/WhatsApp%20Image%202026-06-26%20at%2012.23.19%20PM.jpeg width="30%"> </p>
 
 
 
