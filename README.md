@@ -1,38 +1,191 @@
-# <p align="center"> ## Proyecto Biodiseño-Grupo 6 
+# API IRM — PULSARIX
 
-  ¡Bienvenidos al repositorio del grupo N° 6!
-  
-![pucp_upch](https://github.com/Sebas312431/Funbio-GRUPO-4-/assets/143019044/11b298ef-4331-4d34-9643-bca3bb04df60)
->
-## Miembros del Equipo 6
+Backend en FastAPI para el **Índice de Riesgo Minero (IRM)**.
+El ESP32 mide y envía lecturas por WiFi → la API guarda, calcula 18
+características, valida la exhalación con CO₂, aplica un modelo de regresión
+logística y devuelve el IRM → el LCD y la app celular muestran el resultado.
 
-| Nombre   | Rol        |
-|:--------:|:----------:|
-| Nicole Medina Saraya|  Encargada del GitHub y Adjunta de Coordinación y  |
-|Ariana Roca Peréz | Encargado de Programación y Adjunto de Electronica   |
-| Megan Chunga Rodriguez | Responsable del diseño 3D y Adjunta de edición    |
-| Benji Gomez Zegarra | Coordinador, Encargado de Electrónica     |
-|Sydnee Yampara|Encargado de la impresión, manufactura y Adjunto de Programación|
+> ⚠️ **Aviso:** este resultado NO es un diagnóstico médico. Es una estimación
+> preliminar basada en señales de sensores de aliento.
 
-## Conócenos
-### <p align="center"> Megan Suyay Chunga Rodriguez </p>
-><p align="center"> <img src=https://github.com/AylinMar/FunbioGrupo4/blob/edc241303c95061910510a9596632d5797de373c/Fotos%20del%20Equipo/20231109_201855.jpg width="30%"> </p>
->
-### <p align="center"> Sydnee Asdrith Yampara Mamani </p>
-><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/420ab761a4b617e63a25cd5dae496a98c6aee04f/fotos/WhatsApp%20Image%202026-04-04%20at%2010.00.26%20AM.jpeg width="30%"> </p>
->
-### <p align="center"> Benji Gomez Zegarra  </p>
+---
 
-><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/2995eb4aab4c6106776628adc4cd79482b5affa6/fotos/WhatsApp%20Image%202026-04-04%20at%2010.04.51%20AM.jpeg width="30%"> </p>
->
-### <p align="center"> Nicole Medina Saraya</p>
+## 📁 Archivos
 
-><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/1e395a049b7ff4e68d4638508bd30117d08a9dc6/fotos/Whats-App-Image-2023-09-17-at-21-04-10-(1).jpg width="30%"> </p>
+```
+IRM_API/
+├── api_irm.py                 ← la API (FastAPI)
+├── caracteristicas.py         ← cálculo de las 18 features (compartido)
+├── entrenar_modelo_demo.py    ← genera un modelo de DEMO para probar
+├── modelo_IRM_prototipo.pkl   ← el modelo (demo incluido; reemplázalo por el real)
+├── requirements.txt
+├── lecturas_esp32.csv         ← se crea solo
+└── resultados_irm.csv         ← se crea solo
+```
 
->
-### <p align="center">Ariana Roca Peréz  </p>
+---
 
-><p align="center"> <img src=https://github.com/NJMS23/PBDI_G6/blob/753b96cd75d52f888a84dc500b7e530e3adaad56/fotos/WhatsApp%20Image%202026-06-26%20at%2012.23.19%20PM.jpeg width="30%"> </p>
+## ▶️ Correr en local
 
+```bash
+pip install -r requirements.txt
 
+# (opcional) si todavía no tienes el modelo real, genera el de demo:
+python entrenar_modelo_demo.py
 
+uvicorn api_irm:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Abre en el navegador:
+- `http://localhost:8000/` → debe responder que la API funciona
+- `http://localhost:8000/docs` → **documentación interactiva** (puedes probar todos los endpoints desde ahí, súper útil para la demo)
+
+> 💡 El modelo `.pkl` incluido es un **modelo de demo** entrenado con datos
+> sintéticos (sin validez clínica). Cuando tengas el real, solo reemplaza el
+> archivo `modelo_IRM_prototipo.pkl` — la API no cambia, siempre que el modelo:
+> tenga `.predict_proba()`, esté entrenado con las 18 columnas en el mismo
+> orden, y use la clase `1` como "patrón alterado".
+
+---
+
+## 🧪 Pruebas con curl
+
+**Guardar una lectura:**
+```bash
+curl -X POST http://localhost:8000/guardar_lectura \
+  -H "Content-Type: application/json" \
+  -d '{
+    "participante_id": "P001",
+    "muestra_id": "P001_M001",
+    "clase": 0,
+    "condicion": "normal_no_expuesto",
+    "indice": 0,
+    "tiempo_ms": 12500,
+    "BME688_gas_kohm": 327.5,
+    "BME688_temp_C": 28.4,
+    "BME688_humidity_pct": 55.2,
+    "BME688_pressure_hPa": 1008.3,
+    "MiCS6814_NH3_v": 1.25,
+    "MiCS6814_RED_v": 0.91,
+    "MiCS6814_OX_v": 1.46,
+    "MHZ19_CO2_ppm": 1800
+  }'
+```
+
+**Finalizar la muestra (calcula el IRM):**
+```bash
+curl -X POST http://localhost:8000/finalizar_muestra \
+  -H "Content-Type: application/json" \
+  -d '{"muestra_id": "P001_M001"}'
+```
+
+**Último resultado (lo que consulta la app):**
+```bash
+curl http://localhost:8000/ultimo_resultado
+```
+
+**Resultado de una muestra específica:**
+```bash
+curl http://localhost:8000/resultado/P001_M001
+```
+
+---
+
+## 🔌 Conectar el ESP32
+
+1. El ESP32 toma varias lecturas durante la exhalación. Por **cada** lectura
+   hace un `HTTP POST` a `/guardar_lectura` con el JSON de la lectura.
+   Usa el **mismo `muestra_id`** para todas las lecturas de esa exhalación.
+2. Cuando la exhalación termina, hace un `HTTP POST` a `/finalizar_muestra`
+   con `{"muestra_id": "..."}`.
+3. La respuesta JSON (IRM, riesgo, mensaje) la muestra en el LCD.
+
+Esqueleto en Arduino (ESP32):
+```cpp
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+const char* SSID = "TU_WIFI";
+const char* PASS = "TU_CLAVE";
+String API = "http://192.168.1.50:8000";   // IP de la laptop, o la URL de la nube
+
+void enviarLectura(String muestra, int idx, float gas, float nh3,
+                   float red, float ox, float co2) {
+  HTTPClient http;
+  http.begin(API + "/guardar_lectura");
+  http.addHeader("Content-Type", "application/json");
+  String body = "{";
+  body += "\"participante_id\":\"P001\",";
+  body += "\"muestra_id\":\"" + muestra + "\",";
+  body += "\"indice\":" + String(idx) + ",";
+  body += "\"tiempo_ms\":" + String(millis()) + ",";
+  body += "\"BME688_gas_kohm\":" + String(gas, 2) + ",";
+  body += "\"MiCS6814_NH3_v\":" + String(nh3, 3) + ",";
+  body += "\"MiCS6814_RED_v\":" + String(red, 3) + ",";
+  body += "\"MiCS6814_OX_v\":" + String(ox, 3) + ",";
+  body += "\"MHZ19_CO2_ppm\":" + String(co2, 0);
+  body += "}";
+  http.POST(body);
+  http.end();
+}
+
+String finalizar(String muestra) {
+  HTTPClient http;
+  http.begin(API + "/finalizar_muestra");
+  http.addHeader("Content-Type", "application/json");
+  http.POST("{\"muestra_id\":\"" + muestra + "\"}");
+  String resp = http.getString();   // JSON con IRM y riesgo → mostrar en LCD
+  http.end();
+  return resp;
+}
+```
+
+> El ESP32 ya **no** necesita la tarjeta SD ni calcular el IRM: solo mide, envía
+> por WiFi y muestra lo que la API le devuelve.
+
+---
+
+## 📱 Conectar la app celular
+
+La app **no calcula nada**. Solo consulta la API y muestra:
+`muestra_id`, `IRM`, `riesgo`, `muestra_valida` (estado) y `mensaje` + el aviso
+de seguridad.
+
+- Último resultado: `GET /ultimo_resultado`
+- Por muestra: `GET /resultado/{muestra_id}`
+
+Respuesta que recibe la app:
+```json
+{
+  "muestra_id": "P001_M001",
+  "participante_id": "P001",
+  "muestra_valida": true,
+  "CO2_delta": 1280,
+  "IRM": 18.4,
+  "riesgo": "Bajo",
+  "mensaje": "Medicion dentro del rango bajo de alerta respiratoria",
+  "aviso_seguridad": "Este resultado no representa un diagnostico medico. ..."
+}
+```
+
+Semáforo sugerido en la app por `riesgo`: **Bajo** = verde, **Medio** = ámbar,
+**Alto** = rojo. Si `muestra_valida` es `false`, mostrar "Repetir medición".
+
+---
+
+## ☁️ Subir a la nube (Render)
+
+1. Sube esta carpeta a un repo de GitHub (con el `.pkl` adentro).
+2. En Render → **New > Web Service** → conecta el repo.
+3. Configura:
+   - **Build command:** `pip install -r requirements.txt`
+   - **Start command:** `uvicorn api_irm:app --host 0.0.0.0 --port $PORT`
+4. Tu API quedará en algo como `https://irm-prototipo.onrender.com`.
+   - ESP32 → `https://irm-prototipo.onrender.com/guardar_lectura`
+   - App → `https://irm-prototipo.onrender.com/ultimo_resultado`
+
+> ⚠️ **Ojo con la nube:** en el plan gratis de Render el sistema de archivos es
+> efímero — los CSV se **borran** cada vez que se reinicia o redespliega el
+> servicio. Para una demo está bien, pero si quieres que los datos persistan de
+> verdad, conviene una base de datos (ej. SQLite con disco persistente, o
+> Postgres). Te lo puedo migrar cuando lo necesiten.
