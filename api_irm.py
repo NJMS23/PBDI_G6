@@ -44,6 +44,11 @@ RUTA_RESULTADOS = os.path.join(BASE_DIR, "resultados_irm.csv")
 # Umbral de CO2 para considerar que SI hubo exhalacion
 CO2_DELTA_MINIMO = 500  # ppm
 
+# El sensor de CO2 ya no se usa (dejo de funcionar). Con USAR_VALIDACION_CO2 = False
+# la API NO exige el CO2 y calcula el IRM siempre. Si algun dia vuelve el sensor,
+# poner True para reactivar la validacion.
+USAR_VALIDACION_CO2 = False
+
 # ======================================================================
 # ==========   MODO DE CALCULO DEL IRM   (IMPORTANTE)   =================
 # ======================================================================
@@ -319,8 +324,8 @@ def _calcular_resultado(df_muestra, muestra_id, participante_id):
 
     co2_delta = round(co2["delta"], 1)
 
-    # Validar exhalacion con CO2
-    if co2_delta < CO2_DELTA_MINIMO:
+    # Validar exhalacion con CO2 (SOLO si el sensor de CO2 esta activo)
+    if USAR_VALIDACION_CO2 and co2_delta < CO2_DELTA_MINIMO:
         resultado = {
             "muestra_id": muestra_id,
             "muestra_valida": False,
