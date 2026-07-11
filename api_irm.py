@@ -499,6 +499,35 @@ def resultado_por_muestra(muestra_id: str):
 
 
 # ----------------------------------------------------------------------
+# ESTADO EN VIVO (buzon para el Monitor de la app)
+# ----------------------------------------------------------------------
+# El ESP32 deja el estado actual con POST /estado_vivo (cada ~1 seg).
+# La app lo recoge con GET /estado_vivo para mostrarlo en vivo.
+# Se guarda en memoria (el ultimo estado). No necesita persistir.
+# ----------------------------------------------------------------------
+_estado_vivo = {}
+
+
+@app.post("/estado_vivo")
+def guardar_estado_vivo(datos: dict):
+    """Recibe el estado en vivo del ESP32 y lo guarda (sobrescribe el anterior)."""
+    global _estado_vivo
+    _estado_vivo = datos or {}
+    return {"estado": "ok", "mensaje": "Estado en vivo actualizado"}
+
+
+@app.get("/estado_vivo")
+def obtener_estado_vivo():
+    """Devuelve el ultimo estado en vivo (lo consulta la app cada segundo)."""
+    if not _estado_vivo:
+        return {
+            "estado": "sin_datos",
+            "mensaje": "Aun no hay estado en vivo. El equipo no ha enviado datos.",
+        }
+    return _estado_vivo
+
+
+# ----------------------------------------------------------------------
 # Permite correr con: python api_irm.py  (ademas de uvicorn)
 # En la nube respeta el puerto que asigna el host ($PORT)
 # ----------------------------------------------------------------------
